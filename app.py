@@ -40,7 +40,7 @@ def predict_music():
                 request.json["valence"],
                 request.json["tempo"],
                 request.json["duration_ms"]]
-    filename = 'finalized_music.sav'
+    filename = 'finalized_music.pbz2'
     loaded_model = joblib.load(filename)
     result = loaded_model.predict([inparray])
     print(result)
