@@ -20,6 +20,8 @@ def hello_world():  # put application's code here
 
 @app.route('/weather/predict', methods=['GET'])
 def predict_weather():
+    if verifyToken(request.headers) == False:
+        return "Invalid token", 403
     inparray = [request.json["precipitation"], request.json["temp_max"], request.json["temp_min"], request.json["wind"]]
     filename = 'finalized_model.sav'
     loaded_model = joblib.load(filename)
@@ -34,6 +36,8 @@ def predict_weather():
 
 @app.route('/weather/accuracy', methods=['GET'])
 def weather_accuracy():
+    if verifyToken(request.headers) == False:
+        return "Invalid token", 403
     return {"accuracy": .8464163822525598}
 
 
@@ -71,6 +75,8 @@ def predict_music():
 
 @app.route('/music/accuracy', methods=['GET'])
 def music_accuracy():
+    if verifyToken(request.headers) == False:
+        return "Invalid token", 403
     return {"accuracy": .5509365006852444}
 
 
